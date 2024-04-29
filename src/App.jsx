@@ -23,7 +23,8 @@ function App() {
     <div className="flex w-screen">
       <NavBar />
       <div className="p-4 border w-2/12 min-w-10">
-        <Search />
+      <Search />
+      <div className="overflow-y-auto max-h-screen">
           {emailData.map((email) => (
         <Inbox
           name={email.name}
@@ -31,9 +32,17 @@ function App() {
           subject={email.subject}
           body={email.body}
           key={email.id}
+          read={email.read}
         />))}
+        </div>
       </div>
-      <InboxDetails />
+      <InboxDetails
+      name="name1"
+      date_created="date1"
+      email="email1"
+      subject="subject1"
+      body="lorem ipsum......"
+      />
     </div>
       
     </>
