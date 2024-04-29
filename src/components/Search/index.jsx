@@ -4,7 +4,7 @@ const Search = () => {
         <div className="p-2">
             <form>
             <label for="search"></label>
-            <input className="border rounded-md text-sm" type="text" id="search" name="search" value="search" />
+            <input className="border rounded-md text-sm w-full" type="text" id="search" name="search" value="search" />
             </form> 
         </div>
     

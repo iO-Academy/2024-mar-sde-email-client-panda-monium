@@ -12,7 +12,7 @@ function App() {
     <Header />
     <div className="flex w-screen">
       <NavBar />
-      <div className="p-4 border w-2/12">
+      <div className="p-4 border w-2/12 min-w-10">
         <Search />
         <Inbox name="name1" date="date1" subject="subject1" body="body1" />
       </div>
