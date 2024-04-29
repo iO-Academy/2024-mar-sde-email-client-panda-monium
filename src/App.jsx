@@ -1,15 +1,33 @@
-import './App.css'
-import Header from './components/Header'
-import Inbox from './components/Inbox'
+import { useState, useEffect } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Inbox from "./components/Inbox";
 
 function App() {
+  const [emailData, setEmailData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://email-client-api.dev.io-academy.uk/emails")
+      .then((response) => response.json())
+      .then((data) => {
+        setEmailData(data.data);
+      });
+  }, []);
 
   return (
     <>
-    <Header />
-    <Inbox name="name1" date="date1" subject="subject1" body="body1" />
+      <Header />
+      {emailData.map((email) => (
+        <Inbox
+          name={email.name}
+          date={email.date_created}
+          subject={email.subject}
+          body={email.body}
+          key={email.id}
+        />
+      ))}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
