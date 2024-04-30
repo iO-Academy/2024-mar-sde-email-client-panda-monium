@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react"
 import "./App.css"
-import Inbox from "./components/Inbox"
-import InboxDetails from "./components/InboxDetails"
+import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
-import Search from "./components/Search"
 
 function App() {
   const [emailData, setEmailData] = useState([])
+  const [toggleNavbar, setToggleNavbar] = useState(true)
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -16,13 +15,11 @@ function App() {
       })
   }, [])
 
-  const [hiddenToggle, setHiddenToggle] = useState("hidden")
-
-  function handleClick() {
-    if (hiddenToggle === "hidden") {
-      setHiddenToggle("block")
+  function handleMenuClick() {
+    if (toggleNavbar === true) {
+      setToggleNavbar(false)
     } else {
-      setHiddenToggle("hidden")
+      setToggleNavbar(true)
     }
   }
 
@@ -30,43 +27,36 @@ function App() {
     <>
       <div className="flex bg-gray-700 text-white items-center w-screen justify-between p-6">
         <button
-          className="border p-2 rounded-md md:hidden"
-          onClick={handleClick}
+          className="border p-2 rounded-md sm:hidden"
+          onClick={handleMenuClick}
         >
           Menu
         </button>
         <h1>Email Client</h1>
         <div className="flex items-center">
-          <span className="md:pr-4 pr-2 text-2xl">
+          <span className="sm:pr-4 pr-2 text-2xl">
             <i class="fa-solid fa-circle-user"></i>
           </span>
           <h4>User Name</h4>
         </div>
       </div>
       <div className="flex w-screen">
-        <NavBar status={hiddenToggle} />
-        <div className="p-4 border md:w-2/12 min-w-10 w-screen md:static relative sm:z-0">
-          <Search />
+        <NavBar status={toggleNavbar} />
+        <div className="p-4 border sm:w-2/12 min-w-10 w-screen sm:static relative z-0">
           <div className="overflow-y-auto max-h-screen">
             {emailData.map((email) => (
-              <Inbox
+              <EmailItem
                 name={email.name}
                 date={email.date_created}
                 subject={email.subject}
                 body={email.body}
+                id={email.id}
                 key={email.id}
                 read={email.read}
               />
             ))}
           </div>
         </div>
-        <InboxDetails
-          name="name1"
-          date_created="date1"
-          email="email1"
-          subject="subject1"
-          body="lorem ipsum......"
-        />
       </div>
     </>
   )
