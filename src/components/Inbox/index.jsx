@@ -1,10 +1,14 @@
-const Inbox = ({ name, date, subject, body, read }) => {
+const Inbox = ({ name, date, subject, body, read, id, setEmailId }) => {
   function reverseDate(dateString) {
     return dateString.split("-").reverse().join("/")
   }
 
+  const displayEmail = (e) => {
+    setEmailId(id)
+  }
+
   return (
-    <div className="">
+    <button id={id} onClick={displayEmail} className="">
       {read === "0" ? (
         <div className="border-solid border-2 border-white bg-gray-600 text-white p-2">
           <div className="flex justify-between text-sm">
@@ -24,7 +28,7 @@ const Inbox = ({ name, date, subject, body, read }) => {
           <p className="text-xs">{body}</p>
         </div>
       )}
-    </div>
+    </button>
   )
 }
 

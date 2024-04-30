@@ -17,6 +17,8 @@ function App() {
       })
   }, [])
 
+  const [emailId, setEmailId] = useState()
+  console.log(emailId)
   return (
     <>
       <Header />
@@ -31,8 +33,10 @@ function App() {
                 date={email.date_created}
                 subject={email.subject}
                 body={email.body}
-                key={email.id}
                 read={email.read}
+                id={email.id}
+                key={email.id}
+                setEmailId={setEmailId}
               />
             ))}
           </div>
@@ -50,3 +54,35 @@ function App() {
 }
 
 export default App
+
+// const handleEmailClick = (emailId) => {
+//   // Find the clicked email from the list of emails
+//   const clickedEmail = emails.find(email => email.id === emailId);
+//   setSelectedEmail(clickedEmail);
+// };
+// return (
+//   <Router>
+//     <div className="App">
+//       <Header />
+//       <div className="flex w-screen">
+//         <NavBar />
+//         <div className="p-4 border w-2/12 min-w-10">
+//           <Search />
+//           <div className="overflow-y-auto max-h-screen">
+//             {/* Render email previews directly */}
+//             {emails.map(email => (
+//               <div key={email.id} onClick={() => handleEmailClick(email.id)}>
+//                 <h3>{email.subject}</h3>
+//                 <p>{email.body}</p>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//         <div className="w-8/12">
+//           {/* Display selected email details here */}
+//           {selectedEmail && (
+//             <div>
+//               <h2>{selectedEmail.subject}</h2>
+//               <p>{selectedEmail.body}</p>
+//             </div>
+//           )}
