@@ -8,6 +8,7 @@ import Search from "./components/Search"
 
 function App() {
   const [emailData, setEmailData] = useState([])
+  const [currentEmail, setCurrentEmail] = useState({})
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -17,8 +18,9 @@ function App() {
       })
   }, [])
 
-  const [emailId, setEmailId] = useState()
+  const [emailId, setEmailId] = useState("0")
   console.log(emailId)
+
   return (
     <>
       <Header />
@@ -37,16 +39,17 @@ function App() {
                 id={email.id}
                 key={email.id}
                 setEmailId={setEmailId}
+                setCurrentEmail={setCurrentEmail}
               />
             ))}
           </div>
         </div>
         <InboxDetails
-          name="name1"
-          date_created="date1"
-          email="email1"
-          subject="subject1"
-          body="lorem ipsum......"
+          name={currentEmail.name}
+          date={currentEmail.date_created}
+          email={currentEmail.email}
+          subject={currentEmail.subject}
+          body={currentEmail.body}
         />
       </div>
     </>

@@ -1,10 +1,14 @@
-const Inbox = ({ name, date, subject, body, read, id, setEmailId }) => {
+const Inbox = ({ name, date, subject, body, read, id, setCurrentEmail }) => {
   function reverseDate(dateString) {
     return dateString.split("-").reverse().join("/")
   }
 
   const displayEmail = (e) => {
-    setEmailId(id)
+    fetch(`https://email-client-api.dev.io-academy.uk/emails/${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      setCurrentEmail(data.data.email)
+    })
   }
 
   return (
