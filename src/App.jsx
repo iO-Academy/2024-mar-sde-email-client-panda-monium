@@ -14,6 +14,9 @@ function App() {
       });
   }, []);
 
+  let x = "string";
+
+  
   return (
     <>
       <Header />
