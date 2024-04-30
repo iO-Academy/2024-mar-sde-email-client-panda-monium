@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Inbox from "./components/Inbox";
+import InboxDetails from './components/InboxDetails'
+import NavBar from './components/NavBar'
+import Search from './components/Search'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [emailData, setEmailData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://email-client-api.dev.io-academy.uk/emails")
+      .then((response) => response.json())
+      .then((data) => {
+        setEmailData(data.data);
+      });
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header />
+    <div className="flex w-screen">
+      <NavBar />
+      <div className="p-4 border w-2/12 min-w-10">
+      <Search />
+      <div className="overflow-y-auto max-h-screen">
+          {emailData.map((email) => (
+        <Inbox
+          name={email.name}
+          date={email.date_created}
+          subject={email.subject}
+          body={email.body}
+          key={email.id}
+          read={email.read}
+        />))}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <InboxDetails
+      name="name1"
+      date_created="date1"
+      email="email1"
+      subject="subject1"
+      body="lorem ipsum......"
+      />
+    </div>
+      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
