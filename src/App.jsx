@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react"
 import "./App.css"
-import Header from "./components/Header"
-import Inbox from "./components/Inbox"
-import InboxDetails from "./components/InboxDetails"
+import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
-import Search from "./components/Search"
 
 function App() {
   const [emailData, setEmailData] = useState([])
+  const [showNavbar, setShowNavbar] = useState(false)
   const [currentEmail, setCurrentEmail] = useState({})
+  const [emailId, setEmailId] = useState("0")
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -18,21 +17,44 @@ function App() {
       })
   }, [])
 
-  const [emailId, setEmailId] = useState("0")
-  console.log(emailId)
+  function handleMenuClick() {
+    setShowNavbar(!showNavbar)
+  }
+
+  function formatDate(dateString) {
+    const eventDate = new Date(dateString)
+    return eventDate.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    })
+  }
 
   return (
     <>
-      <Header />
+      <div className="flex bg-gray-700 text-white items-center w-screen justify-between p-6">
+        <button
+          className="border p-2 rounded-md sm:hidden"
+          onClick={handleMenuClick}
+        >
+          Menu
+        </button>
+        <h1>Email Client</h1>
+        <div className="flex items-center">
+          <span className="sm:pr-4 pr-2 text-2xl">
+            <i className="fa-solid fa-circle-user"></i>
+          </span>
+          <h4>User Name</h4>
+        </div>
+      </div>
       <div className="flex w-screen">
-        <NavBar />
-        <div className="p-4 border w-2/12 min-w-10">
-          <Search />
-          <div className="overflow-y-auto max-h-screen">
+        <NavBar status={showNavbar ? "block" : "hidden"} />
+        <div className="border min-w-10 sm:w-3/12 w-screen sm:static relative z-0">
+          <div className="overflow-y-auto sm:min-w-64 max-h-screen">
             {emailData.map((email) => (
-              <Inbox
+              <EmailItem
                 name={email.name}
-                date={email.date_created}
+                date={formatDate(email.date_created)}
                 subject={email.subject}
                 body={email.body}
                 read={email.read}
@@ -43,49 +65,19 @@ function App() {
               />
             ))}
           </div>
+          <div>
+            <InboxDetails
+              name={currentEmail.name}
+              date={currentEmail.date_created}
+              email={currentEmail.email}
+              subject={currentEmail.subject}
+              body={currentEmail.body}
+            />
+          </div>
         </div>
-        <InboxDetails
-          name={currentEmail.name}
-          date={currentEmail.date_created}
-          email={currentEmail.email}
-          subject={currentEmail.subject}
-          body={currentEmail.body}
-        />
       </div>
     </>
   )
 }
 
 export default App
-
-// const handleEmailClick = (emailId) => {
-//   // Find the clicked email from the list of emails
-//   const clickedEmail = emails.find(email => email.id === emailId);
-//   setSelectedEmail(clickedEmail);
-// };
-// return (
-//   <Router>
-//     <div className="App">
-//       <Header />
-//       <div className="flex w-screen">
-//         <NavBar />
-//         <div className="p-4 border w-2/12 min-w-10">
-//           <Search />
-//           <div className="overflow-y-auto max-h-screen">
-//             {/* Render email previews directly */}
-//             {emails.map(email => (
-//               <div key={email.id} onClick={() => handleEmailClick(email.id)}>
-//                 <h3>{email.subject}</h3>
-//                 <p>{email.body}</p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//         <div className="w-8/12">
-//           {/* Display selected email details here */}
-//           {selectedEmail && (
-//             <div>
-//               <h2>{selectedEmail.subject}</h2>
-//               <p>{selectedEmail.body}</p>
-//             </div>
-//           )}
