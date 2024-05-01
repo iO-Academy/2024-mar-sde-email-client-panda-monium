@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar"
 
 function App() {
   const [emailData, setEmailData] = useState([])
-  const [toggleNavbar, setToggleNavbar] = useState(true)
+  const [showNavbar, setShowNavbar] = useState(false)
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -16,11 +16,21 @@ function App() {
   }, [])
 
   function handleMenuClick() {
-    if (toggleNavbar === true) {
-      setToggleNavbar(false)
+    if (showNavbar) {
+      setShowNavbar(false)
     } else {
-      setToggleNavbar(true)
+      setShowNavbar(true)
     }
+  }
+
+  function formatDate(dateString) {
+    const eventDate = new Date(dateString)
+    console.log()
+    return eventDate.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    })
   }
 
   return (
@@ -41,13 +51,13 @@ function App() {
         </div>
       </div>
       <div className="flex w-screen">
-        <NavBar status={toggleNavbar} />
-        <div className="p-4 border sm:w-2/12 min-w-10 w-screen sm:static relative z-0">
-          <div className="overflow-y-auto max-h-screen">
+        <NavBar status={showNavbar ? "block" : "hidden"} />
+        <div className="p-4 border min-w-10 sm:w-3/12 w-screen sm:static relative z-0">
+          <div className="overflow-y-auto sm:min-w-64 max-h-screen">
             {emailData.map((email) => (
               <EmailItem
                 name={email.name}
-                date={email.date_created}
+                date={formatDate(email.date_created)}
                 subject={email.subject}
                 body={email.body}
                 id={email.id}
