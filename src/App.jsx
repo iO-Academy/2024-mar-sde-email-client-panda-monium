@@ -52,7 +52,7 @@ function App() {
       </div>
       <div className="flex w-screen">
         <NavBar status={showNavbar ? "block" : "hidden"} />
-        <div className="p-4 border min-w-10 sm:w-3/12 w-screen sm:static relative z-0">
+        <div className="border min-w-10 sm:w-3/12 w-screen sm:static relative z-0">
           <div className="overflow-y-auto sm:min-w-64 max-h-screen">
             {emailData.map((email) => (
               <EmailItem
