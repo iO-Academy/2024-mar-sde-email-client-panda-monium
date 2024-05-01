@@ -2,12 +2,13 @@ import { useState, useEffect } from "react"
 import "./App.css"
 import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
+import InboxDetails from "./components/InboxDetails"
 
 function App() {
   const [emailData, setEmailData] = useState([])
   const [showNavbar, setShowNavbar] = useState(false)
   const [currentEmail, setCurrentEmail] = useState({})
-  const [emailId, setEmailId] = useState("0")
+  const [showCloseButton, setShowCloseButton] = useState(false)
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -49,7 +50,7 @@ function App() {
       </div>
       <div className="flex w-screen">
         <NavBar status={showNavbar ? "block" : "hidden"} />
-        <div className="border min-w-10 sm:w-3/12 w-screen sm:static relative z-0">
+        <div className="flex w-screen border min-w-10 sm:static relative z-0">
           <div className="overflow-y-auto sm:min-w-64 max-h-screen">
             {emailData.map((email) => (
               <EmailItem
@@ -60,20 +61,25 @@ function App() {
                 read={email.read}
                 id={email.id}
                 key={email.id}
-                setEmailId={setEmailId}
                 setCurrentEmail={setCurrentEmail}
+                setShowCloseButton={setShowCloseButton}
               />
             ))}
           </div>
-          <div>
-            <InboxDetails
-              name={currentEmail.name}
-              date={currentEmail.date_created}
-              email={currentEmail.email}
-              subject={currentEmail.subject}
-              body={currentEmail.body}
-            />
-          </div>
+          <InboxDetails
+            name={currentEmail.name}
+            date={
+              currentEmail.date_created
+                ? formatDate(currentEmail.date_created)
+                : ""
+            }
+            email={currentEmail.email}
+            subject={currentEmail.subject}
+            body={currentEmail.body}
+            closeButton={showCloseButton ? "block" : "hidden"}
+            setCurrentEmail={setCurrentEmail}
+            setShowCloseButton={setShowCloseButton}
+          />
         </div>
       </div>
     </>
