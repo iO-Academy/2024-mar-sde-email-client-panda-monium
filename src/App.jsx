@@ -16,16 +16,11 @@ function App() {
   }, [])
 
   function handleMenuClick() {
-    if (showNavbar) {
-      setShowNavbar(false)
-    } else {
-      setShowNavbar(true)
-    }
+    setShowNavbar(!showNavbar)
   }
 
   function formatDate(dateString) {
     const eventDate = new Date(dateString)
-    console.log()
     return eventDate.toLocaleDateString("en-GB", {
       year: "numeric",
       month: "numeric",
@@ -45,7 +40,7 @@ function App() {
         <h1>Email Client</h1>
         <div className="flex items-center">
           <span className="sm:pr-4 pr-2 text-2xl">
-            <i class="fa-solid fa-circle-user"></i>
+            <i className="fa-solid fa-circle-user"></i>
           </span>
           <h4>User Name</h4>
         </div>
