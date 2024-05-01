@@ -1,33 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react"
+import "./App.css"
+import EmailItem from "./components/EmailItem"
+import NavBar from "./components/NavBar"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [emailData, setEmailData] = useState([])
+  const [showNavbar, setShowNavbar] = useState(false)
+
+  useEffect(() => {
+    fetch("https://email-client-api.dev.io-academy.uk/emails")
+      .then((response) => response.json())
+      .then((data) => {
+        setEmailData(data.data)
+      })
+  }, [])
+
+  function handleMenuClick() {
+    setShowNavbar(!showNavbar)
+  }
+
+  function formatDate(dateString) {
+    const eventDate = new Date(dateString)
+    return eventDate.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    })
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div className="flex bg-gray-700 text-white items-center w-screen justify-between p-6">
+        <button
+          className="border p-2 rounded-md sm:hidden"
+          onClick={handleMenuClick}
+        >
+          Menu
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <h1>Email Client</h1>
+        <div className="flex items-center">
+          <span className="sm:pr-4 pr-2 text-2xl">
+            <i className="fa-solid fa-circle-user"></i>
+          </span>
+          <h4>User Name</h4>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="flex w-screen">
+        <NavBar status={showNavbar ? "block" : "hidden"} />
+        <div className="border min-w-10 sm:w-3/12 w-screen sm:static relative z-0">
+          <div className="overflow-y-auto sm:min-w-64 max-h-screen">
+            {emailData.map((email) => (
+              <EmailItem
+                name={email.name}
+                date={formatDate(email.date_created)}
+                subject={email.subject}
+                body={email.body}
+                id={email.id}
+                key={email.id}
+                read={email.read}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   )
 }
