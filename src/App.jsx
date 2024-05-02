@@ -11,6 +11,7 @@ function App() {
   const [currentEmail, setCurrentEmail] = useState({})
   const [showCloseButton, setShowCloseButton] = useState(false)
   const [selectedEmail, setSelectedEmail] = useState(null)
+  const [composeEmailVisible, setComposeEmailVisible] = useState(false)
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -52,7 +53,12 @@ function App() {
       </div>
       <div className="flex w-screen">
         <NavBar status={showNavbar ? "block" : "hidden"} />
-        <ComposeEmail />
+        <div>
+          <button onClick={() => setComposeEmailVisible(true)}>
+            Compose Email
+          </button>
+          {composeEmailVisible && <ComposeEmail />}
+        </div>
         <div className="flex w-screen border min-w-10 sm:static relative z-0">
           <div className="overflow-y-auto sm:min-w-64 max-h-screen">
             {emailData.map((email) => (
