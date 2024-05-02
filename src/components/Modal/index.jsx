@@ -45,60 +45,58 @@ const Modal = () => {
 
   // JSX for the ComposeEmail component
   return (
-    <div className="border min-w-10 sm:w-3/12 w-screen sm:static relative z-50">
-      <div className="p-4">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="recipient"
-              className="block text-sm font-medium"
-            ></label>
-            <input
-              type="email"
-              id="recipient"
-              className="border rounded-md px-3 py-2 w-full"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              required
-              placeholder="To"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="subject"
-              className="block text-sm font-medium"
-            ></label>
-            <input
-              type="text"
-              id="subject"
-              className="border rounded-md px-3 py-2 w-full"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              required
-              placeholder="Subject"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="body" className="block text-sm font-medium"></label>
-            <textarea
-              id="body"
-              className="border rounded-md px-3 py-2 w-full h-32 resize-none"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              required
-            />
-          </div>
-          <button className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-          >
-            Send
-          </button>
-        </form>
-      </div>
+    <div className="border min-w-10 sm:static p-4">
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="recipient"
+            className="block text-sm font-medium"
+          ></label>
+          <input
+            type="email"
+            id="recipient"
+            className="border rounded-md px-3 py-2 w-full"
+            value={recipient}
+            onChange={(e) => setRecipient(e.target.value)}
+            required
+            placeholder="To"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="subject"
+            className="block text-sm font-medium"
+          ></label>
+          <input
+            type="text"
+            id="subject"
+            className="border rounded-md px-3 py-2 w-full"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            required
+            placeholder="Subject"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="body" className="block text-sm font-medium"></label>
+          <textarea
+            id="body"
+            className="border rounded-md px-3 py-2 w-full h-32 resize-none"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            required
+          />
+        </div>
+        <button className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="bg-green-500 text-white px-4 py-2 rounded-md ml-5 hover:bg-green-600"
+        >
+          Send
+        </button>
+      </form>
     </div>
   )
 }
