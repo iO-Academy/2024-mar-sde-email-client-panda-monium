@@ -10,7 +10,7 @@ const MessagePane = ({
   const [currentEmailData, setCurrentEmailData] = useState({})
 
   const closeEmail = () => {
-    setCurrentEmailId("")
+    setCurrentEmailId(0)
     setShowCloseButton(false)
   }
 
@@ -26,9 +26,11 @@ const MessagePane = ({
     <>
       {currentEmailData && (
         <div
-          className={`w-full p-8 ${closeButton}
-        bg-white      
-        sm:w-8/12 
+          className={`w-full 
+              p-8 
+              ${closeButton}
+            bg-white      
+              sm:w-8/12 
               w-screen
               h-screen
               sm:static 
