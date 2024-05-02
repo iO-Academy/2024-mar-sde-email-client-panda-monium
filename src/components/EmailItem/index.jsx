@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 const EmailItem = ({
   name,
   date,
@@ -7,10 +9,14 @@ const EmailItem = ({
   id,
   setCurrentEmail,
   setShowCloseButton,
+  setSelectedEmail,
+  selectedEmail,
 }) => {
-  let readStatus = "border-gray-300 bg-gray-100 text-black"
-  if (read === "0") {
-    readStatus = " border-white bg-gray-600 text-white"
+  let emailColor = "border-gray-300 bg-gray-100 text-black"
+  if (selectedEmail === id) {
+    emailColor = "bg-blue-500 text-white"
+  } else if (read === "0") {
+    emailColor = " border-white bg-gray-600 text-white"
   }
 
   const displayEmail = (e) => {
@@ -19,17 +25,19 @@ const EmailItem = ({
       .then((data) => {
         setCurrentEmail(data.data.email)
         setShowCloseButton(true)
-        // readStatus = "bg-blue-300"
-        // console.log(readStatus)
-        // return readStatus
+        setEmailColor(id)
       })
+  }
+
+  function setEmailColor(id) {
+    setSelectedEmail(id)
   }
 
   return (
     <div
       onClick={displayEmail}
       id={id}
-      className={`border-solid border-2 p-2 ${readStatus}`}
+      className={`border-solid border-2 p-2 ${emailColor}`}
     >
       <div className="flex justify-between text-sm">
         <h3>{name}</h3>
@@ -37,6 +45,7 @@ const EmailItem = ({
       </div>
       <p className="text-xs">{subject}</p>
       <p className="text-xs">{body}</p>
+      <button className="sr-only">Open Email</button>
     </div>
   )
 }

@@ -9,6 +9,7 @@ function App() {
   const [showNavbar, setShowNavbar] = useState(false)
   const [currentEmail, setCurrentEmail] = useState({})
   const [showCloseButton, setShowCloseButton] = useState(false)
+  const [selectedEmail, setSelectedEmail] = useState(null)
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -63,6 +64,8 @@ function App() {
                 key={email.id}
                 setCurrentEmail={setCurrentEmail}
                 setShowCloseButton={setShowCloseButton}
+                setSelectedEmail={setSelectedEmail}
+                selectedEmail={selectedEmail}
               />
             ))}
           </div>
