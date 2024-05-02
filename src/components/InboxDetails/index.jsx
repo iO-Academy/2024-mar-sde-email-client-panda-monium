@@ -15,7 +15,17 @@ const InboxDetails = ({
 
   return (
     <>
-      <div className={`w-full p-8 ${closeButton}`}>
+      <div
+        className={`w-full p-8 ${closeButton}
+        bg-white      
+        sm:w-8/12 
+              w-screen
+              h-screen
+              sm:static 
+              absolute 
+              z-10 
+      `}
+      >
         <div className="flex justify-between text-sm pt-4 border-t-2">
           <h2>{name}</h2>
           <h2>{date}</h2>

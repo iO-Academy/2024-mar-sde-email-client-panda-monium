@@ -37,7 +37,7 @@ const EmailItem = ({
     <div
       onClick={displayEmail}
       id={id}
-      className={`border-solid border-2 p-2 ${emailColor}`}
+      className={`border-solid border-2 p-5 w-screen sm:w-full ${emailColor}`}
     >
       <div className="flex justify-between text-sm">
         <h3>{name}</h3>
