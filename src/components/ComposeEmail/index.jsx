@@ -7,7 +7,8 @@ function ComposeEmail({ composeEmailVisible }) {
     event.preventDefault()
     // Prepare the email data
     const emailData = {
-      recipient: recipient,
+      name: "test",
+      email: recipient,
       subject: subject,
       body: body,
     }

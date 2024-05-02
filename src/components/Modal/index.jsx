@@ -1,22 +1,24 @@
 // Import necessary dependencies
 import React, { useState } from "react"
 // Define the ComposeEmail component
-const Modal = () => {
+const Modal = ({ setComposeEmailVisible, closeModal }) => {
   // State variables to hold the email data
   const [recipient, setRecipient] = useState("")
   const [subject, setSubject] = useState("")
   const [body, setBody] = useState("")
+  const [cancelEmailModal, setCancelEmailModal] = useState(true)
   // Function to handle form submission
   function handleSubmit(event) {
     event.preventDefault()
     // Here you can perform actions like sending the email
     // For simplicity, let's just log the composed email
     const emailData = {
-      name: recipient,
+      name: "name",
+      email: recipient,
       subject: subject,
       body: body,
     }
-    console.log(emailData)
+
     // Clear the form after submission
     // Send the email data to the API
     fetch("https://email-client-api.dev.io-academy.uk/emails", {
@@ -41,6 +43,10 @@ const Modal = () => {
       .catch((error) => {
         console.error("Error sending email:", error)
       })
+  }
+
+  function closeModal() {
+    setCancelEmailModal(false)
   }
 
   // JSX for the ComposeEmail component
@@ -88,7 +94,10 @@ const Modal = () => {
               required
             />
           </div>
-          <button className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+          <button
+            onClick={closeModal}
+            className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+          >
             Cancel
           </button>
           <button

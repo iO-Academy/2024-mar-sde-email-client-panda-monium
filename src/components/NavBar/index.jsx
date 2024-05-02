@@ -1,4 +1,4 @@
-const NavBar = ({ status }) => {
+const NavBar = ({ status, showModal }) => {
   return (
     <div
       className={`border
@@ -16,7 +16,12 @@ const NavBar = ({ status }) => {
         sm:block 
         sm:min-w-48`}
     >
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">New Email</h3>
+      <h3
+        onClick={showModal}
+        className="sm:py-2 py-4 sm:text-sm text-lg cursor-pointer"
+      >
+        New Email
+      </h3>
       <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Inbox</h3>
       <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Sent</h3>
       <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Deleted</h3>
