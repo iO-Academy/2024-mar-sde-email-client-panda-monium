@@ -12,11 +12,11 @@ const EmailItem = ({
   setSelectedEmail,
   selectedEmail,
 }) => {
-  let emailColor = "border-gray-300 bg-gray-100 text-black"
+  let emailColor = "border-gray-300 bg-gray-100 text-black cursor-pointer"
   if (selectedEmail === id) {
-    emailColor = "bg-blue-500 text-white"
+    emailColor = "bg-blue-500 text-white cursor-pointer"
   } else if (read === "0") {
-    emailColor = " border-white bg-gray-600 text-white"
+    emailColor = " border-white bg-gray-600 text-white cursor-pointer"
   }
 
   const displayEmail = (e) => {

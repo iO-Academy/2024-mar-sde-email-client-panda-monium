@@ -1,16 +1,23 @@
+// Import necessary dependencies
 import React, { useState } from "react"
-function ComposeEmail({ composeEmailVisible }) {
+// Define the ComposeEmail component
+const Modal = () => {
+  // State variables to hold the email data
   const [recipient, setRecipient] = useState("")
   const [subject, setSubject] = useState("")
   const [body, setBody] = useState("")
+  // Function to handle form submission
   function handleSubmit(event) {
     event.preventDefault()
-    // Prepare the email data
+    // Here you can perform actions like sending the email
+    // For simplicity, let's just log the composed email
     const emailData = {
-      recipient: recipient,
+      name: recipient,
       subject: subject,
       body: body,
     }
+    console.log(emailData)
+    // Clear the form after submission
     // Send the email data to the API
     fetch("https://email-client-api.dev.io-academy.uk/emails", {
       method: "POST",
@@ -26,7 +33,7 @@ function ComposeEmail({ composeEmailVisible }) {
           setSubject("")
           setBody("")
           // Hide the compose email component
-          setComposeEmailVisible(true)
+          setComposeEmailVisible(false)
         } else {
           console.error("Failed to send email:", response.statusText)
         }
@@ -35,19 +42,17 @@ function ComposeEmail({ composeEmailVisible }) {
         console.error("Error sending email:", error)
       })
   }
+
+  // JSX for the ComposeEmail component
   return (
-    <div
-      className={`border min-w-10 sm:w-3/12 w-screen sm:static relative z-0 ${
-        composeEmailVisible ? "" : "hidden"
-      }`}
-    >
+    <div className="border min-w-10 sm:w-3/12 w-screen sm:static relative z-50">
       <div className="p-4">
-        <h2 className="text-lg font-semibold mb-2">Compose Email</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="recipient" className="block text-sm font-medium">
-              Recipient:
-            </label>
+            <label
+              htmlFor="recipient"
+              className="block text-sm font-medium"
+            ></label>
             <input
               type="email"
               id="recipient"
@@ -55,12 +60,14 @@ function ComposeEmail({ composeEmailVisible }) {
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
               required
+              placeholder="To"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="subject" className="block text-sm font-medium">
-              Subject:
-            </label>
+            <label
+              htmlFor="subject"
+              className="block text-sm font-medium"
+            ></label>
             <input
               type="text"
               id="subject"
@@ -68,12 +75,11 @@ function ComposeEmail({ composeEmailVisible }) {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               required
+              placeholder="Subject"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="body" className="block text-sm font-medium">
-              Body:
-            </label>
+            <label htmlFor="body" className="block text-sm font-medium"></label>
             <textarea
               id="body"
               className="border rounded-md px-3 py-2 w-full h-32 resize-none"
@@ -82,9 +88,12 @@ function ComposeEmail({ composeEmailVisible }) {
               required
             />
           </div>
+          <button className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+            Cancel
+          </button>
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
           >
             Send
           </button>
@@ -93,4 +102,5 @@ function ComposeEmail({ composeEmailVisible }) {
     </div>
   )
 }
-export default ComposeEmail
+// Export the ComposeEmail component
+export default Modal
