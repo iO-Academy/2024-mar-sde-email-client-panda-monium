@@ -7,7 +7,7 @@ const EmailItem = ({
   body,
   read,
   id,
-  setCurrentEmail,
+  setCurrentEmailId,
   setShowCloseButton,
   setSelectedEmail,
   selectedEmail,
@@ -20,13 +20,9 @@ const EmailItem = ({
   }
 
   const displayEmail = (e) => {
-    fetch(`https://email-client-api.dev.io-academy.uk/emails/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCurrentEmail(data.data.email)
-        setShowCloseButton(true)
-        setEmailColor(id)
-      })
+    setCurrentEmailId(id)
+    setShowCloseButton(true)
+    setEmailColor(id)
   }
 
   function setEmailColor(id) {
