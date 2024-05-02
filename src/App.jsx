@@ -3,6 +3,7 @@ import "./App.css"
 import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
 import InboxDetails from "./components/InboxDetails"
+import ComposeEmail from "./components/ComposeEmail"
 
 function App() {
   const [emailData, setEmailData] = useState([])
@@ -51,6 +52,7 @@ function App() {
       </div>
       <div className="flex w-screen">
         <NavBar status={showNavbar ? "block" : "hidden"} />
+        <ComposeEmail />
         <div className="flex w-screen border min-w-10 sm:static relative z-0">
           <div className="overflow-y-auto sm:min-w-64 max-h-screen">
             {emailData.map((email) => (
