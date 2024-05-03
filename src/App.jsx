@@ -2,14 +2,15 @@ import { useState, useEffect } from "react"
 import "./App.css"
 import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
-import InboxDetails from "./components/InboxDetails"
+
 import Modal from "./components/Modal"
 import { BrowserRouter } from "react-router-dom"
+import MessagePane from "./components/MessagePane"
 
 function App() {
   const [emailData, setEmailData] = useState([])
   const [showNavbar, setShowNavbar] = useState(false)
-  const [currentEmail, setCurrentEmail] = useState({})
+  const [currentEmailId, setCurrentEmailId] = useState(0)
   const [showCloseButton, setShowCloseButton] = useState(false)
   const [selectedEmail, setSelectedEmail] = useState(null)
   const [composeEmailVisible, setComposeEmailVisible] = useState(false)
@@ -76,26 +77,19 @@ function App() {
                 read={email.read}
                 id={email.id}
                 key={email.id}
-                setCurrentEmail={setCurrentEmail}
+                setCurrentEmailId={setCurrentEmailId}
                 setShowCloseButton={setShowCloseButton}
                 setSelectedEmail={setSelectedEmail}
                 selectedEmail={selectedEmail}
               />
             ))}
           </div>
-          <InboxDetails
-            name={currentEmail.name}
-            date={
-              currentEmail.date_created
-                ? formatDate(currentEmail.date_created)
-                : ""
-            }
-            email={currentEmail.email}
-            subject={currentEmail.subject}
-            body={currentEmail.body}
+          <MessagePane
+            id={currentEmailId}
+            formatDate={formatDate}
             closeButton={showCloseButton ? "block" : "hidden"}
-            setCurrentEmail={setCurrentEmail}
             setShowCloseButton={setShowCloseButton}
+            setCurrentEmailId={setCurrentEmailId}
           />
         </div>
       </div>
