@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const NavBar = ({ status, showModal }) => {
   return (
     <div
@@ -22,9 +24,21 @@ const NavBar = ({ status, showModal }) => {
       >
         New Email
       </h3>
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Inbox</h3>
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Sent</h3>
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Deleted</h3>
+      <h3>
+        <Link to="/" className="sm:py-2 py-4 sm:text-sm text-lg">
+          Inbox
+        </Link>
+      </h3>
+      <h3>
+        <Link to="/sent" className="sm:py-2 py-4 sm:text-sm text-lg">
+          Sent
+        </Link>
+      </h3>
+      <h3>
+        <Link to="/" className="sm:py-2 py-4 sm:text-sm text-lg">
+          Deleted
+        </Link>
+      </h3>
     </div>
   )
 }

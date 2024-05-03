@@ -1,38 +1,17 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import "./App.css"
-import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
 import Modal from "./components/Modal"
-import { BrowserRouter } from "react-router-dom"
-import MessagePane from "./components/MessagePane"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Inbox from "./components/Inbox"
+import SentFolder from "./components/SentFolder"
 
 function App() {
-  const [emailData, setEmailData] = useState([])
   const [showNavbar, setShowNavbar] = useState(false)
-  const [currentEmailId, setCurrentEmailId] = useState(0)
-  const [showCloseButton, setShowCloseButton] = useState(false)
-  const [selectedEmail, setSelectedEmail] = useState(null)
   const [composeEmailVisible, setComposeEmailVisible] = useState(false)
-
-  useEffect(() => {
-    fetch("https://email-client-api.dev.io-academy.uk/emails")
-      .then((response) => response.json())
-      .then((data) => {
-        setEmailData(data.data)
-      })
-  }, [])
 
   function handleMenuClick() {
     setShowNavbar(!showNavbar)
-  }
-
-  function formatDate(dateString) {
-    const eventDate = new Date(dateString)
-    return eventDate.toLocaleDateString("en-GB", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    })
   }
 
   function showModal() {
@@ -67,30 +46,10 @@ function App() {
               <Modal setComposeEmailVisible={setComposeEmailVisible} />
             )}
           </div>
-          <div className="overflow-y-auto w-full sm:w-3/12 sm:min-w-64 max-h-screen">
-            {emailData.map((email) => (
-              <EmailItem
-                name={email.name}
-                date={formatDate(email.date_created)}
-                subject={email.subject}
-                body={email.body}
-                read={email.read}
-                id={email.id}
-                key={email.id}
-                setCurrentEmailId={setCurrentEmailId}
-                setShowCloseButton={setShowCloseButton}
-                setSelectedEmail={setSelectedEmail}
-                selectedEmail={selectedEmail}
-              />
-            ))}
-          </div>
-          <MessagePane
-            id={currentEmailId}
-            formatDate={formatDate}
-            closeButton={showCloseButton ? "block" : "hidden"}
-            setShowCloseButton={setShowCloseButton}
-            setCurrentEmailId={setCurrentEmailId}
-          />
+          <Routes>
+            <Route path="/" element={<Inbox />} />
+            <Route path="/sent" element={<SentFolder />} />
+          </Routes>
         </div>
       </div>
     </BrowserRouter>
