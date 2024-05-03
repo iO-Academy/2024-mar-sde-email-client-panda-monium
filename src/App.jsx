@@ -12,7 +12,6 @@ function App() {
   const [showCloseButton, setShowCloseButton] = useState(false)
   const [selectedEmail, setSelectedEmail] = useState(null)
   const [composeEmailVisible, setComposeEmailVisible] = useState(false)
-  const [cancelEmailModal, setCancelEmailModal] = useState(true)
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -39,10 +38,6 @@ function App() {
     setComposeEmailVisible(true)
   }
 
-  function closeModal() {
-    setCancelEmailModal(false)
-  }
-
   return (
     <>
       <div className="flex bg-gray-700 text-white items-center w-screen justify-between p-6">
@@ -66,11 +61,9 @@ function App() {
           status={showNavbar ? "block" : "hidden"}
         />
         {composeEmailVisible && (
-          <Modal
-            closeModal={closeModal}
-            setComposeEmailVisible={setComposeEmailVisible}
-          />
+          <Modal setComposeEmailVisible={setComposeEmailVisible} />
         )}
+
         <div className="flex w-screen border min-w-10 sm:static relative z-0">
           <div className="overflow-y-auto sm:min-w-64 max-h-screen">
             {emailData.map((email) => (

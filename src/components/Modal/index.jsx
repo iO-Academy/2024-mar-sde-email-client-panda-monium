@@ -1,12 +1,12 @@
 // Import necessary dependencies
 import React, { useState } from "react"
 // Define the ComposeEmail component
-const Modal = ({ setComposeEmailVisible, closeModal }) => {
+const Modal = ({ setComposeEmailVisible, closeModal, cancelEmailModal }) => {
   // State variables to hold the email data
   const [recipient, setRecipient] = useState("")
   const [subject, setSubject] = useState("")
   const [body, setBody] = useState("")
-  const [cancelEmailModal, setCancelEmailModal] = useState(true)
+
   // Function to handle form submission
   function handleSubmit(event) {
     event.preventDefault()
@@ -46,7 +46,7 @@ const Modal = ({ setComposeEmailVisible, closeModal }) => {
   }
 
   function closeModal() {
-    setCancelEmailModal(false)
+    setComposeEmailVisible(false)
   }
 
   // JSX for the ComposeEmail component
@@ -65,7 +65,7 @@ const Modal = ({ setComposeEmailVisible, closeModal }) => {
               className="border rounded-md px-3 py-2 w-full"
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
-              required
+              //required
               placeholder="To"
             />
           </div>
@@ -80,7 +80,7 @@ const Modal = ({ setComposeEmailVisible, closeModal }) => {
               className="border rounded-md px-3 py-2 w-full"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              required
+              //required
               placeholder="Subject"
             />
           </div>
@@ -91,11 +91,11 @@ const Modal = ({ setComposeEmailVisible, closeModal }) => {
               className="border rounded-md px-3 py-2 w-full h-32 resize-none"
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              required
+              //required
             />
           </div>
           <button
-            onClick={closeModal}
+            onClick={() => setComposeEmailVisible(false)}
             className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
           >
             Cancel
