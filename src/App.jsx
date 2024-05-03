@@ -4,6 +4,7 @@ import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
 import InboxDetails from "./components/InboxDetails"
 import Modal from "./components/Modal"
+import { BrowserRouter } from "react-router-dom"
 
 function App() {
   const [emailData, setEmailData] = useState([])
@@ -39,7 +40,7 @@ function App() {
   }
 
   return (
-    <>
+    <BrowserRouter>
       <div className="flex bg-gray-700 text-white items-center w-screen justify-between p-6">
         <button
           className="border p-2 rounded-md sm:hidden"
@@ -98,7 +99,7 @@ function App() {
           />
         </div>
       </div>
-    </>
+    </BrowserRouter>
   )
 }
 
