@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import "./App.css"
 import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
-
 import Modal from "./components/Modal"
 import { BrowserRouter } from "react-router-dom"
 import MessagePane from "./components/MessagePane"
@@ -62,12 +61,13 @@ function App() {
           showModal={showModal}
           status={showNavbar ? "block" : "hidden"}
         />
-        {composeEmailVisible && (
-          <Modal setComposeEmailVisible={setComposeEmailVisible} />
-        )}
-
         <div className="flex w-screen border min-w-10 sm:static relative z-0">
-          <div className="overflow-y-auto sm:min-w-64 max-h-screen">
+          <div className="absolute z-20 bg-white w-full sm:w-1/2 sm:ml-200">
+            {composeEmailVisible && (
+              <Modal setComposeEmailVisible={setComposeEmailVisible} />
+            )}
+          </div>
+          <div className="overflow-y-auto w-full sm:w-3/12 sm:min-w-64 max-h-screen">
             {emailData.map((email) => (
               <EmailItem
                 name={email.name}
