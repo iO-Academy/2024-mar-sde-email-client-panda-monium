@@ -50,6 +50,7 @@ const SentFolder = () => {
           closeButton={showCloseButton ? "block" : "hidden"}
           setShowCloseButton={setShowCloseButton}
           setCurrentEmailId={setCurrentEmailId}
+          buttonName={"Delete"}
         />
       </div>
     </>

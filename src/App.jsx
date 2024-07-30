@@ -5,6 +5,7 @@ import Modal from "./components/Modal"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Inbox from "./components/Inbox"
 import SentFolder from "./components/SentFolder"
+import DeletedFolder from "./components/DeletedFolder"
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(false)
@@ -49,6 +50,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Inbox />} />
             <Route path="/sent" element={<SentFolder />} />
+            <Route path="/deleted" element={<DeletedFolder />} />
           </Routes>
         </div>
       </div>

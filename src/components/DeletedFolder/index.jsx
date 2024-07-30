@@ -2,14 +2,14 @@ import { useState, useEffect } from "react"
 import MessagePane from "../MessagePane"
 import EmailItem from "../EmailItem"
 
-const Inbox = () => {
+const DeletedFolder = () => {
   const [emailData, setEmailData] = useState([])
   const [currentEmailId, setCurrentEmailId] = useState(0)
   const [showCloseButton, setShowCloseButton] = useState(false)
   const [selectedEmail, setSelectedEmail] = useState(null)
 
   useEffect(() => {
-    fetch("https://email-client-api.dev.io-academy.uk/emails")
+    fetch("https://email-client-api.dev.io-academy.uk/emails/deleted")
       .then((response) => response.json())
       .then((data) => {
         setEmailData(data.data)
@@ -24,6 +24,7 @@ const Inbox = () => {
       day: "numeric",
     })
   }
+
   return (
     <>
       <div className="overflow-y-auto w-full sm:w-3/12 sm:min-w-64 max-h-screen">
@@ -50,11 +51,11 @@ const Inbox = () => {
           closeButton={showCloseButton ? "block" : "hidden"}
           setShowCloseButton={setShowCloseButton}
           setCurrentEmailId={setCurrentEmailId}
-          buttonName={"Delete"}
+          buttonName={"Close"}
         />
       </div>
     </>
   )
 }
 
-export default Inbox
+export default DeletedFolder

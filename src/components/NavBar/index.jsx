@@ -35,7 +35,7 @@ const NavBar = ({ status, showModal }) => {
         </Link>
       </h3>
       <h3>
-        <Link to="/" className="sm:py-2 py-4 sm:text-sm text-lg">
+        <Link to="/deleted" className="sm:py-2 py-4 sm:text-sm text-lg">
           Deleted
         </Link>
       </h3>
