@@ -8,6 +8,25 @@ const DeletedFolder = () => {
   const [showCloseButton, setShowCloseButton] = useState(false)
   const [selectedEmail, setSelectedEmail] = useState(null)
 
+  //   const deleteEmail = () => {
+  //     // fetch(`https://email-client-api.dev.io-academy.uk/emails/${id}`, {
+  //     //   method: "DELETE",
+  //     // })
+  //     //   .then((response) => response.json())
+  //     //   .then((data) => {
+  //     //     console.log(data)
+  //     //   })
+  //     fetch(`https://email-client-api.dev.io-academy.uk/emails/deleted/`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(currentEmailData),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log(data)
+  //       })
+  //   }
+
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails/deleted")
       .then((response) => response.json())

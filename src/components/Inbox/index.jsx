@@ -16,6 +16,24 @@ const Inbox = () => {
       })
   }, [])
 
+  const deleteEmail = (id) => {
+    fetch(`https://email-client-api.dev.io-academy.uk/emails/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setEmailData(emailData.filter((email) => email.id !== id))
+      })
+  }
+
+  useEffect(() => {
+    fetch("https://email-client-api.dev.io-academy.uk/emails")
+      .then((response) => response.json())
+      .then((data) => {
+        setEmailData(data.data)
+      })
+  }, [])
+
   function formatDate(dateString) {
     const eventDate = new Date(dateString)
     return eventDate.toLocaleDateString("en-GB", {
@@ -51,6 +69,7 @@ const Inbox = () => {
           setShowCloseButton={setShowCloseButton}
           setCurrentEmailId={setCurrentEmailId}
           buttonName={"Delete"}
+          deleteEmail={deleteEmail}
         />
       </div>
     </>
