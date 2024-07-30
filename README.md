@@ -34,3 +34,5 @@ github: https://github.com/iO-Academy/2024-mar-sde-email-client-panda-monium
 
 Acknowledgements
 GitHub Repository
+
+![image](https://github.com/user-attachments/assets/913d78c3-835d-4a15-8c4e-d11e69aeee83)
