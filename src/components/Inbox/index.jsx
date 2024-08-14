@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import MessagePane from "../MessagePane"
 import EmailItem from "../EmailItem"
+import SearchBar from "../SearchBar"
 
 const Inbox = () => {
   const [emailData, setEmailData] = useState([])
@@ -45,6 +46,7 @@ const Inbox = () => {
   return (
     <>
       <div className="overflow-y-auto w-full sm:w-3/12 sm:min-w-64 max-h-screen">
+        <SearchBar />
         {emailData.map((email) => (
           <EmailItem
             name={email.name}
