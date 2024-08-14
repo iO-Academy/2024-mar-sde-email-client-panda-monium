@@ -55,7 +55,10 @@ const Inbox = () => {
   return (
     <>
       <div className="overflow-y-auto w-full sm:w-3/12 sm:min-w-64 max-h-screen">
-        <SearchBar handleInput={searchEmails} />
+        <SearchBar 
+        setSearchTerm={setSearchTerm}
+        searchTerm={searchTerm}
+        />
         {emailData.map((email) => (
           <EmailItem
             name={email.name}
