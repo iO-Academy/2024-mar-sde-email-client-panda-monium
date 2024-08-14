@@ -33,8 +33,12 @@ const Inbox = () => {
   }
 
   useEffect(() => {
-    console.log(searchTerm);
-  }, [searchTerm]);
+    fetch(`https://email-client-api.dev.io-academy.uk/emails?search=${searchTerm}`)
+    .then((response) => response.json())
+    .then((data) => {
+      setEmailData(data.data);
+    });
+}, [searchTerm]);
 
   useEffect(() => {
     fetch("https://email-client-api.dev.io-academy.uk/emails")
@@ -57,7 +61,6 @@ const Inbox = () => {
       <div className="overflow-y-auto w-full sm:w-3/12 sm:min-w-64 max-h-screen">
         <SearchBar 
         setSearchTerm={setSearchTerm}
-        searchTerm={searchTerm}
         />
         {emailData.map((email) => (
           <EmailItem

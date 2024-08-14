@@ -9,7 +9,7 @@ const SearchBar = ({ setSearchTerm }) => {
       <div className="p-2">
         <label>
           <input
-            onChange={ (e) => {
+            onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
             name="myInput"
