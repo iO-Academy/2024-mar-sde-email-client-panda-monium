@@ -63,16 +63,14 @@ const DeletedFolder = () => {
           />
         ))}
       </div>
-      <div>
-        <MessagePane
-          id={currentEmailId}
-          formatDate={formatDate}
-          closeButton={showCloseButton ? "block" : "hidden"}
-          setShowCloseButton={setShowCloseButton}
-          setCurrentEmailId={setCurrentEmailId}
-          buttonName={"Close"}
-        />
-      </div>
+      <MessagePane
+        id={currentEmailId}
+        formatDate={formatDate}
+        closeButton={showCloseButton ? "block" : "hidden"}
+        setShowCloseButton={setShowCloseButton}
+        setCurrentEmailId={setCurrentEmailId}
+        buttonName={"Close"}
+      />
     </>
   )
 }

@@ -43,16 +43,14 @@ const SentFolder = () => {
           />
         ))}
       </div>
-      <div>
-        <MessagePane
-          id={currentEmailId}
-          formatDate={formatDate}
-          closeButton={showCloseButton ? "block" : "hidden"}
-          setShowCloseButton={setShowCloseButton}
-          setCurrentEmailId={setCurrentEmailId}
-          buttonName={"Delete"}
-        />
-      </div>
+      <MessagePane
+        id={currentEmailId}
+        formatDate={formatDate}
+        closeButton={showCloseButton ? "block" : "hidden"}
+        setShowCloseButton={setShowCloseButton}
+        setCurrentEmailId={setCurrentEmailId}
+        buttonName={"Delete"}
+      />
     </>
   )
 }
