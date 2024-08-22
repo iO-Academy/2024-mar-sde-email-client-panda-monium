@@ -17,6 +17,7 @@ function App() {
 
   function showModal() {
     setComposeEmailVisible(true)
+    handleMenuClick()
   }
 
   return (
@@ -40,6 +41,7 @@ function App() {
         <NavBar
           showModal={showModal}
           status={showNavbar ? "block" : "hidden"}
+          handleMenuClick={handleMenuClick}
         />
         <div className="flex w-screen border min-w-10 sm:static relative z-0">
           <div className="absolute z-20 bg-white w-full sm:w-1/2 sm:ml-200">

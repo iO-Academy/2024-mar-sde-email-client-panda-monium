@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const NavBar = ({ status, showModal }) => {
+const NavBar = ({ status, showModal, handleMenuClick }) => {
   return (
     <div
       className={`border
@@ -24,17 +24,17 @@ const NavBar = ({ status, showModal }) => {
       >
         New Email
       </h3>
-      <h3>
+      <h3 onClick={handleMenuClick}>
         <Link to="/" className="sm:py-2 py-4 sm:text-sm text-lg">
           Inbox
         </Link>
       </h3>
-      <h3>
+      <h3 onClick={handleMenuClick}>
         <Link to="/sent" className="sm:py-2 py-4 sm:text-sm text-lg">
           Sent
         </Link>
       </h3>
-      <h3>
+      <h3 onClick={handleMenuClick}>
         <Link to="/deleted" className="sm:py-2 py-4 sm:text-sm text-lg">
           Deleted
         </Link>

@@ -31,7 +31,6 @@ const MessagePane = ({
               sm:static 
               absolute 
               z-10 
-             bg-yellow-200
       `}
         >
           <div className="flex justify-between text-sm pt-4 border-t-2">
