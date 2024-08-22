@@ -6,13 +6,10 @@ const MessagePane = ({
   closeButton,
   setCurrentEmailId,
   setShowCloseButton,
+  buttonName,
+  deleteEmail,
 }) => {
   const [currentEmailData, setCurrentEmailData] = useState({})
-
-  const closeEmail = () => {
-    setCurrentEmailId(0)
-    setShowCloseButton(false)
-  }
 
   useEffect(() => {
     fetch(`https://email-client-api.dev.io-academy.uk/emails/${id}`)
@@ -30,8 +27,6 @@ const MessagePane = ({
               p-8 
               ${closeButton}
             bg-white      
-              sm:w-8/12 
-              w-screen
               h-screen
               sm:static 
               absolute 
@@ -46,10 +41,10 @@ const MessagePane = ({
           <h1 className="text-3xl pb-10">{currentEmailData.subject}</h1>
           <p className="text-sm pb-4 border-b-2">{currentEmailData.body}</p>
           <button
-            onClick={closeEmail}
+            onClick={() => deleteEmail(id)}
             className="absolute right-5 mt-4 p-1 border rounded-lg"
           >
-            Close
+            {buttonName}
           </button>
         </div>
       )}

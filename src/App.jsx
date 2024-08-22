@@ -1,39 +1,27 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import "./App.css"
-import EmailItem from "./components/EmailItem"
 import NavBar from "./components/NavBar"
-import MessagePane from "./components/MessagePane"
+import Modal from "./components/Modal"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Inbox from "./components/Inbox"
+import SentFolder from "./components/SentFolder"
+import DeletedFolder from "./components/DeletedFolder"
 
 function App() {
-  const [emailData, setEmailData] = useState([])
   const [showNavbar, setShowNavbar] = useState(false)
-  const [currentEmailId, setCurrentEmailId] = useState(0)
-  const [showCloseButton, setShowCloseButton] = useState(false)
-  const [selectedEmail, setSelectedEmail] = useState(null)
-
-  useEffect(() => {
-    fetch("https://email-client-api.dev.io-academy.uk/emails")
-      .then((response) => response.json())
-      .then((data) => {
-        setEmailData(data.data)
-      })
-  }, [])
+  const [composeEmailVisible, setComposeEmailVisible] = useState(false)
 
   function handleMenuClick() {
     setShowNavbar(!showNavbar)
   }
 
-  function formatDate(dateString) {
-    const eventDate = new Date(dateString)
-    return eventDate.toLocaleDateString("en-GB", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    })
+  function showModal() {
+    setComposeEmailVisible(true)
+    handleMenuClick()
   }
 
   return (
-    <>
+    <BrowserRouter>
       <div className="flex bg-gray-700 text-white items-center w-screen justify-between p-6">
         <button
           className="border p-2 rounded-md sm:hidden"
@@ -50,35 +38,25 @@ function App() {
         </div>
       </div>
       <div className="flex w-screen">
-        <NavBar status={showNavbar ? "block" : "hidden"} />
+        <NavBar
+          showModal={showModal}
+          status={showNavbar ? "block" : "hidden"}
+          handleMenuClick={handleMenuClick}
+        />
         <div className="flex w-screen border min-w-10 sm:static relative z-0">
-          <div className="overflow-y-auto sm:min-w-64 max-h-screen">
-            {emailData.map((email) => (
-              <EmailItem
-                name={email.name}
-                date={formatDate(email.date_created)}
-                subject={email.subject}
-                body={email.body}
-                read={email.read}
-                id={email.id}
-                key={email.id}
-                setCurrentEmailId={setCurrentEmailId}
-                setShowCloseButton={setShowCloseButton}
-                setSelectedEmail={setSelectedEmail}
-                selectedEmail={selectedEmail}
-              />
-            ))}
+          <div className="absolute z-20 bg-white w-full sm:w-1/2 sm:ml-200">
+            {composeEmailVisible && (
+              <Modal setComposeEmailVisible={setComposeEmailVisible} />
+            )}
           </div>
-          <MessagePane
-            id={currentEmailId}
-            formatDate={formatDate}
-            closeButton={showCloseButton ? "block" : "hidden"}
-            setShowCloseButton={setShowCloseButton}
-            setCurrentEmailId={setCurrentEmailId}
-          />
+          <Routes>
+            <Route path="/" element={<Inbox />} />
+            <Route path="/sent" element={<SentFolder />} />
+            <Route path="/deleted" element={<DeletedFolder />} />
+          </Routes>
         </div>
       </div>
-    </>
+    </BrowserRouter>
   )
 }
 

@@ -1,4 +1,6 @@
-const NavBar = ({ status }) => {
+import { Link } from "react-router-dom"
+
+const NavBar = ({ status, showModal, handleMenuClick }) => {
   return (
     <div
       className={`border
@@ -16,10 +18,27 @@ const NavBar = ({ status }) => {
         sm:block 
         sm:min-w-48`}
     >
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">New Email</h3>
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Inbox</h3>
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Sent</h3>
-      <h3 className="sm:py-2 py-4 sm:text-sm text-lg">Deleted</h3>
+      <h3
+        onClick={showModal}
+        className="sm:py-2 py-4 sm:text-sm text-lg cursor-pointer"
+      >
+        New Email
+      </h3>
+      <h3 onClick={handleMenuClick}>
+        <Link to="/" className="sm:py-2 py-4 sm:text-sm text-lg">
+          Inbox
+        </Link>
+      </h3>
+      <h3 onClick={handleMenuClick}>
+        <Link to="/sent" className="sm:py-2 py-4 sm:text-sm text-lg">
+          Sent
+        </Link>
+      </h3>
+      <h3 onClick={handleMenuClick}>
+        <Link to="/deleted" className="sm:py-2 py-4 sm:text-sm text-lg">
+          Deleted
+        </Link>
+      </h3>
     </div>
   )
 }
