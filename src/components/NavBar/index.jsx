@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const NavBar = ({ status, showModal, handleMenuClick }) => {
   return (
     <div
+      onClick={handleMenuClick}
       className={`border
        text-white 
        h-screen
@@ -20,27 +21,27 @@ const NavBar = ({ status, showModal, handleMenuClick }) => {
     >
       <h3
         onClick={showModal}
-        className="sm:py-2 py-4 sm:text-sm text-lg cursor-pointer"
+        className="sm:py-3 mb-6 sm:text-sm text-lg cursor-pointer"
       >
         New Email
       </h3>
-      <h3 onClick={handleMenuClick}>
-        <Link to="/" className="sm:py-2 py-4 sm:text-sm text-lg">
+      <h3 className="sm:py-3 mb-6 sm:text-sm text-lg">
+        <Link to="/">
           Inbox
         </Link>
       </h3>
-      <h3 onClick={handleMenuClick}>
-        <Link to="/sent" className="sm:py-2 py-4 sm:text-sm text-lg">
+      <h3 className="sm:py-3 mb-6 sm:text-sm text-lg">
+        <Link to="/sent">
           Sent
         </Link>
       </h3>
-      <h3 onClick={handleMenuClick}>
-        <Link to="/deleted" className="sm:py-2 py-4 sm:text-sm text-lg">
+      <h3 className="sm:py-3 mb-6 sm:text-sm text-lg">
+        <Link to="/deleted">
           Deleted
         </Link>
       </h3>
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

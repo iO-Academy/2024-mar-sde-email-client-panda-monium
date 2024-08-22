@@ -1,23 +1,22 @@
-import { useState } from "react"
-import "./App.css"
-import NavBar from "./components/NavBar"
-import Modal from "./components/Modal"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Inbox from "./components/Inbox"
-import SentFolder from "./components/SentFolder"
-import DeletedFolder from "./components/DeletedFolder"
+import { useState } from "react";
+import "./App.css";
+import NavBar from "./components/NavBar";
+import Modal from "./components/Modal";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Inbox from "./components/Inbox";
+import SentFolder from "./components/SentFolder";
+import DeletedFolder from "./components/DeletedFolder";
 
 function App() {
-  const [showNavbar, setShowNavbar] = useState(false)
-  const [composeEmailVisible, setComposeEmailVisible] = useState(false)
+  const [showNavbar, setShowNavbar] = useState(false);
+  const [composeEmailVisible, setComposeEmailVisible] = useState(false);
 
   function handleMenuClick() {
-    setShowNavbar(!showNavbar)
+    setShowNavbar(!showNavbar);
   }
 
   function showModal() {
-    setComposeEmailVisible(true)
-    handleMenuClick()
+    setComposeEmailVisible(true);
   }
 
   return (
@@ -43,7 +42,7 @@ function App() {
           status={showNavbar ? "block" : "hidden"}
           handleMenuClick={handleMenuClick}
         />
-        <div className="flex w-screen border min-w-10 sm:static relative z-0">
+        <div className="flex w-screen border min-w-10 sm:static relative z-0 overscroll-none">
           <div className="absolute z-20 bg-white w-full sm:w-1/2 sm:ml-200">
             {composeEmailVisible && (
               <Modal setComposeEmailVisible={setComposeEmailVisible} />
@@ -57,7 +56,7 @@ function App() {
         </div>
       </div>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
